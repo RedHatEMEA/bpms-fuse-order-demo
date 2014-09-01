@@ -2,10 +2,11 @@ package com.redhat.emea.example.bfod.model;
 
 import java.util.Date;
 import java.util.UUID;
+
 /**
  * 
  * The profile of a user placing an order.
- *
+ * 
  */
 public class Profile
 {
@@ -119,6 +120,31 @@ public class Profile
 	public void setBirthday(Date birthday)
 	{
 		this.birthday = birthday;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("Profile [id=");
+		builder.append(id);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", honorificPrefix=");
+		builder.append(honorificPrefix);
+		builder.append(", gender=");
+		builder.append(gender);
+		builder.append(", birthday=");
+		builder.append(birthday);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

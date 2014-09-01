@@ -3,11 +3,10 @@ package com.redhat.emea.example.bfod.model;
 import java.util.Date;
 import java.util.UUID;
 
-
 /**
  * 
  * A representation of an item available to be added to an {@link Order}.
- *
+ * 
  */
 public class CatalogueItem
 {
@@ -16,32 +15,32 @@ public class CatalogueItem
 	 * The unique ID of the item.
 	 */
 	private UUID id;
-	
+
 	/**
 	 * The product ID of the product.
 	 */
 	private UUID productId;
-	
+
 	/**
 	 * The amount that is the one off payment required for the product in pence.
 	 */
 	private Integer oneOffAmount;
-	
+
 	/**
 	 * The recurring payment required for the product in pence.
 	 */
 	private Integer recurringAmount;
-	
+
 	/**
 	 * The frequency of the recurring payment amount e.g. monthly.
 	 */
 	private String frequency;
-	
+
 	/**
 	 * The date the product is active and avaiable from.
 	 */
 	private Date activationDateTime;
-	
+
 	/**
 	 * The date after which the product is not longer available.
 	 */
@@ -56,7 +55,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(UUID id)
 	{
@@ -72,7 +72,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param productId the productId to set
+	 * @param productId
+	 *            the productId to set
 	 */
 	public void setProductId(UUID productId)
 	{
@@ -88,7 +89,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param oneOffAmount the oneOffAmount to set
+	 * @param oneOffAmount
+	 *            the oneOffAmount to set
 	 */
 	public void setOneOffAmount(Integer oneOffAmount)
 	{
@@ -104,7 +106,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param recurringAmount the recurringAmount to set
+	 * @param recurringAmount
+	 *            the recurringAmount to set
 	 */
 	public void setRecurringAmount(Integer recurringAmount)
 	{
@@ -120,7 +123,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param frequency the frequency to set
+	 * @param frequency
+	 *            the frequency to set
 	 */
 	public void setFrequency(String frequency)
 	{
@@ -136,7 +140,8 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param activationDateTime the activationDateTime to set
+	 * @param activationDateTime
+	 *            the activationDateTime to set
 	 */
 	public void setActivationDateTime(Date activationDateTime)
 	{
@@ -152,16 +157,39 @@ public class CatalogueItem
 	}
 
 	/**
-	 * @param expirationDateTime the expirationDateTime to set
+	 * @param expirationDateTime
+	 *            the expirationDateTime to set
 	 */
 	public void setExpirationDateTime(Date expirationDateTime)
 	{
 		this.expirationDateTime = expirationDateTime;
 	}
-	
-	
-	
-	
-	
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("CatalogueItem [id=");
+		builder.append(id);
+		builder.append(", productId=");
+		builder.append(productId);
+		builder.append(", oneOffAmount=");
+		builder.append(oneOffAmount);
+		builder.append(", recurringAmount=");
+		builder.append(recurringAmount);
+		builder.append(", frequency=");
+		builder.append(frequency);
+		builder.append(", activationDateTime=");
+		builder.append(activationDateTime);
+		builder.append(", expirationDateTime=");
+		builder.append(expirationDateTime);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

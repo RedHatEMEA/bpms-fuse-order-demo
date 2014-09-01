@@ -145,4 +145,29 @@ public class Campaign
 		this.discountPercentage = discountPercentage;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("Campaign [id=");
+		builder.append(id);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", startDate=");
+		builder.append(startDate);
+		builder.append(", endDate=");
+		builder.append(endDate);
+		builder.append(", discountPercentage=");
+		builder.append(discountPercentage);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

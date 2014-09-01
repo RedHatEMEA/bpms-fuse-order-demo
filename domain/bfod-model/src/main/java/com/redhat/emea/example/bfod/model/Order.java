@@ -98,4 +98,25 @@ public class Order
 		this.catalogueItems = catalogueItems;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("Order [id=");
+		builder.append(id);
+		builder.append(", campaign=");
+		builder.append(campaign);
+		builder.append(", profile=");
+		builder.append(profile);
+		builder.append(", catalogueItems=");
+		builder.append(catalogueItems);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
