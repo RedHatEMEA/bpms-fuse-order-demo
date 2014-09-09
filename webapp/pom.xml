@@ -39,6 +39,58 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+        		<groupId>org.codehaus.cargo</groupId>
+		        <artifactId>cargo-maven2-plugin</artifactId>
+		        <version>${cargo.plugin.version}</version>
+
+		        <configuration>
+		          <container>
+		            <containerId>tomcat7x</containerId>
+		            <home>${project.basedir}/apache-tomcat-7.0.55</home>
+		            <output>${project.basedir}/target/cargo/logs/container.log</output>
+		            <append>false</append>
+		            <log>${project.basedir}/target/cargo/logs/cargo.log</log>
+		          </container>
+		          <deployables>
+		            <deployable>
+		              <properties>
+		                <context>/</context>
+		              </properties>
+		            </deployable>
+		          </deployables>
+		          <configuration>
+		            <properties>
+		              <cargo.servlet.port>8181</cargo.servlet.port>
+		              <cargo.jvmargs>
+		                ${jrebel.config}
+		                -Drebel.log=true
+		                -Drebel.log.file=${project.basedir}/target/cargo/logs/jrebel.log
+		                -Xms1536M
+		                -Xmx1536M
+		                -XX:MaxPermSize=256m
+		                -Xdebug
+		                -Xnoagent
+		                -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n                
+		                -Dlogback.configurationFile=${project.basedir}/conf/app/logback.groovy
+		                -DlogLocation=${project.basedir}/target/cargo/logs
+		                -DparentProject.root=${project.basedir}/../
+		                -Dspring.profiles.active=${spring.profiles}
+		              </cargo.jvmargs>
+		            </properties>
+
+<!--
+		            <configfiles>
+		              <configfile>
+		                <file>${project.basedir}/conf/container/tomcat-users.xml</file>
+		                <todir>conf/</todir>
+		                <tofile>tomcat-users.xml</tofile>
+		              </configfile>
+		            </configfiles>
+		        -->
+		          </configuration>
+		        </configuration>
+		      </plugin>
 		</plugins>
   </build>
 </project>
