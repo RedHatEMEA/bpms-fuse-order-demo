@@ -147,6 +147,7 @@ sudo cp /vagrant/bpm/standalone.conf /opt/rh/jboss-eap-6.1/bin
 sudo cp /vagrant/bpm/standalone.xml /opt/rh/jboss-eap-6.1/standalone/configuration
 sudo cp /opt/rh/jboss-eap-6.1/bin/init.d/jboss-as-standalone.sh /etc/init.d
 sudo chkconfig --add jboss-as-standalone.sh
+sudo chkconfig jboss-as-standalone.sh on
 sudo service jboss-as-standalone.sh start 
 
 echo "Waiting for BPMS to deploy"
