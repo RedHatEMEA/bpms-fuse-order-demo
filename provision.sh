@@ -140,6 +140,9 @@ sudo mkdir -p /etc/jboss-as
 sudo mkdir -p /opt/rh/jboss-eap-6.1/git
 sudo mkdir -p /opt/rh/jboss-eap-6.1/index
 sudo mkdir -p /opt/rh/jboss-eap-6.1/bpms-repo
+echo "Configure BPM Suite user"
+/opt/rh/jboss-eap-6.1/bin/add-user.sh -u bpmadmin -p bpmsuite1! -a --realm ApplicationRealm --role admin,analyst,manager
+
 cd /opt/rh
 sudo chmod -R 777 jboss-eap-6.1
 sudo cp /vagrant/bpm/jboss-as.conf /etc/jboss-as/
@@ -150,10 +153,12 @@ sudo chkconfig --add jboss-as-standalone.sh
 sudo chkconfig jboss-as-standalone.sh on
 sudo service jboss-as-standalone.sh start 
 
+
 echo "Waiting for BPMS to deploy"
 waitFor "started in" "/opt/rh/jboss-eap-6.1/standalone/log/server.log" "300" "Awaiting EAP server start up"
 	if [[ "$WAIT_FOR_RESULT" == "completed" ]]; then
-		echo "BPMS now deployed. Browse to http://192.168.33.10/business-central"
+		echo "BPMS now deployed. Browse to http://192.168.33.10:8080/business-central"
+		echo "BPMS User: bpmadmin Password: bpmsuite1!"
 	else
 		echo "Server start up did not complete after a long wait"
 		
