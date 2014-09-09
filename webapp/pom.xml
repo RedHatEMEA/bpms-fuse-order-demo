@@ -9,6 +9,7 @@
   <packaging>war</packaging>
 
   <properties>
+  	<maven-war-plugin.version>2.4</maven-war-plugin.version>
     <cargo.plugin.version>1.4.9</cargo.plugin.version>
   </properties>
   
@@ -22,6 +23,7 @@
     		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
 				<configuration>
 					<attachClasses>true</attachClasses>
 					<classesClassifier>classes</classesClassifier>
