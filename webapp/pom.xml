@@ -3,24 +3,22 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>org.fabric8.demo</groupId>
-    <artifactId>fabric8-web-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-  
-  <artifactId>fabric8-web-angular</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <groupId>com.redhat.emea.bfod</groupId>
+  <artifactId>bfod-webapp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
+  <properties>
+    <cargo.plugin.version>1.4.9</cargo.plugin.version>
+  </properties>
   
-  <name>fabric8-web-angular Maven Webapp</name>
+  <name>BFOD Angular Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
   <dependencies/>
   
   <build>
-    <finalName>fabric8-web-angular</finalName>
+    <finalName>bfod-webapp</finalName>
     		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
