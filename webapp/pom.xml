@@ -76,7 +76,7 @@
 		                -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n                
 		                -Dlogback.configurationFile=${project.basedir}/conf/app/logback.groovy
 		                -DlogLocation=${project.basedir}/target/cargo/logs
-		                -DparentProject.root=${project.basedir}/../
+		                -Dproject.root=${project.basedir}
 		                -Dspring.profiles.active=${spring.profiles}
 		              </cargo.jvmargs>
 		            </properties>
