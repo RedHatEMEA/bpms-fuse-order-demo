@@ -7,49 +7,75 @@
   	<div class="container-fluid">	    
 	    <div ng-controller="ProcessController">
 	    	<div class="row">
-	    		<div class="form-group col-lg-2 col-md-offset-5">
+	    		<div class="form-group col-md-2 col-md-offset-5">
 	    			<h3><center>Customer</center></h3>
 	    		</div>
 	    	</div>
 	    	<div class="row">
-	            <div class="form-group col-lg-2 col-md-offset-5">
+	            <div class="form-group col-md-2 col-md-offset-4">
 	                <label>First Name:</label>
-	      			<input type="text" ng-model="firstName" class="form-control" size="20">
+	      			<input type="text" ng-model="order.firstName" class="form-control">
+	            </div>
+	            <div class="form-group col-md-2">
+	                <label>Last Name:</label>
+	      			<input type="text" ng-model="order.lastName" class="form-control">
 	            </div>
 	        </div>
 
-	        <div class="row">
-	            <div class="form-group col-lg-2 col-md-offset-5">
-	                <label>Last Name:</label>
-	      			<input type="text" ng-model="lastName" class="form-control" size="20">
-	            </div>
-	        </div>    	
+	    	<div class="row">
 
-	    	<div class="row">
-	    		<div class="form-group col-lg-2 col-md-offset-5">
-	    			<label>Gender:</label>	    		
-	        		<input type="radio" ng-model="gender" value="female"> Female
-	        		<input type="radio" ng-model="gender" value="male"> Male
-	        	</div>
-	    		
-	    	</div>
-	    	<div class="row">
-	    		<div class="form-group col-lg-2 col-md-offset-5">
-		    		<label>Birth Date:</label>		    	
+	    		<div class="form-group col-md-2 col-md-offset-4">
+	    			<label>Birth Date:</label>		    	
 			    
 		            <p class="input-group">
-		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="birthDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="order.birthDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 		              <span class="input-group-btn">
 		                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 		              </span>
 		            </p>
-			        
-			    </div>
-			</div>   	
+	    		</div>
+
+	    		<div class="form-group col-md-2">
+	    			<label>Gender:</label>
+	    			<br/>	    		
+	    			<div class="btn-group">
+	    				<!--
+  						<button type="button" class="btn btn-primary" ng-model="gender" btn-radio="'female'">Female</button>
+  						<button type="button" class="btn btn-primary" ng-model="gender" btn-radio="'male'">Male</button>  						 					
+  						-->
+  						<input type="radio" ng-model="order.gender" value="female"> Female
+  						&nbsp;&nbsp;
+	        			<input type="radio" ng-model="order.gender" value="male"> Male
+					</div>
+	    			<!--
+	        		<input type="radio" ng-model="gender" value="female" > Female
+	        		<input type="radio" ng-model="gender" value="male"> Male
+	        	-->
+	        	</div>	        	
+	    	</div> 	
+
+			<hr/>	
+
+			<div class="row">
+	    		<div class="form-group col-md-2 col-md-offset-4">
+	    			<label>Campaign:</label>
+	    			<select ng-model="order.campaignId" ng-options="campaign.id as campaign.name for campaign in campaigns" class="form-control">
+      					<option value="">-- choose campaign --</option>
+    				</select>	        		
+	        	</div>	
+
+	        	<div class="form-group col-md-2">
+	    			<label>Catalogue Items:</label>
+	    			<select ng-model="order.catologueItems" ng-options="catalogueItem.id as catalogueItem.name for catalogueItem in catalogueItems" class="form-control" multiple ng-multiple="true">      					
+    				</select>	        		
+	        	</div>	
+	    	</div>
+
+	    	<pre>{{ order | json }}</pre>
 			
 			<div class="row">
-				<div class="form-group col-lg-2 col-md-offset-5">
-					<button class="btn btn-primary btn-block" ng-click="submitRequest()">Submit</button>
+				<div class="form-group col-md-2 col-md-offset-5">
+					<button class="btn btn-success btn-block" ng-click="submitOrder()">Submit</button>
 				</div>
 			</div>
 	    </div>
