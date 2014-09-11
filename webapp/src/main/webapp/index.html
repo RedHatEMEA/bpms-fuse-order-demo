@@ -30,7 +30,7 @@
     </style>
   </head>
   <body>
-  	<div class="container-fluid">	    
+  	<div class="container-fluid" style="border: .5px solid; border-radius: 25px;">	    
 	    <div ng-controller="ProcessController">
 	    	<div class="row">
 	    		<div class="form-group col-md-2 col-md-offset-5">
@@ -64,19 +64,11 @@
 	    		<div class="form-group col-md-2">
 	    			<label>Gender:</label>
 	    			<br/>	    		
-	    			<div class="btn-group">
-	    				<!--
-  						<button type="button" class="btn btn-primary" ng-model="gender" btn-radio="'female'">Female</button>
-  						<button type="button" class="btn btn-primary" ng-model="gender" btn-radio="'male'">Male</button>  						 					
-  						-->
+	    			<div class="btn-group">	    				
   						<input type="radio" ng-model="order.gender" value="female"> Female
   						&nbsp;&nbsp;
 	        			<input type="radio" ng-model="order.gender" value="male"> Male
-					</div>
-	    			<!--
-	        		<input type="radio" ng-model="gender" value="female" > Female
-	        		<input type="radio" ng-model="gender" value="male"> Male
-	        	-->
+					</div>	    			
 	        	</div>	        	
 	    	</div> 	
 
@@ -100,7 +92,7 @@
 					<br/>
 
 	    			<ul class="list-unstyled icon-list chevron-right">
-                		<li ng-repeat="catalogueItem in order.catalogueItems">{{ catalogueItem.name }}  
+                		<li ng-repeat="catalogueItem in order.catalogueItems | orderBy:'name'">{{ catalogueItem.name }}  
                 			<button type="button" class="btn btn-danger btn-sm" ng-click="removeCatalogueItem($index)">
   								<span class="glyphicon glyphicon-remove"></span>				
   							</button>
@@ -111,30 +103,29 @@
 
 	    	<script type="text/ng-template" id="catalogueItems.html">
         		<div class="modal-header">
-            		<h3 class="modal-title">I&apos;m a modal!</h3>
+            		<h3 class="modal-title">Catalogue Items</h3>
         		</div>
         		<div class="modal-body">
             		<ul class="list-unstyled">
-                		<li ng-repeat="item in items">
+                		<li ng-repeat="item in items | orderBy:'name'">
                 			<input type="checkbox" ng-model="item.selected" ng-checked="selection.indexOf($index) > -1" ng-click="toggleSelection($index)">
-                    		<a ng-click="selected.item = item">{{ item.name }}</a>
+                    		<a ng-click="toggleSelection($index)">{{ item.name }}</a>
                 		</li>
-            		</ul>
-            		Selected: <b>{{ selected.item.name }}</b>
+            		</ul>            		
         		</div>
         		<div class="modal-footer">
             		<button class="btn btn-primary" ng-click="ok()">OK</button>
             		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         		</div>
-    		</script>
-
-	    	<pre>{{ order | json }}</pre>
+    		</script>    	
 			
 			<div class="row">
 				<div class="form-group col-md-2 col-md-offset-5">
 					<button class="btn btn-success btn-block" ng-click="submitOrder()">Submit</button>
 				</div>
 			</div>
+
+			<pre>{{ order | json }}</pre>
 	    </div>
 		
 	</div>

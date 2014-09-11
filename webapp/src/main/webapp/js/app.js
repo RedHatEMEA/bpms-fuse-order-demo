@@ -1,6 +1,6 @@
 angular.module('processApp', ['ui.bootstrap']);
 
-var ProcessController = function($scope,$modal,$log) {
+var ProcessController = function($scope,$modal,$log,$location) {
     $scope.order = {};    
  
     $scope.submitOrder = function() {
@@ -33,10 +33,10 @@ var ProcessController = function($scope,$modal,$log) {
     $scope.order.catalogueItems = [];
 
     $scope.availableCatalogueItems = [
-      {id:'c1', name:'Catalogue 1'},
-      {id:'c2', name:'Catalogue 2'},
-      {id:'c3', name:'Catalogue 3'},
-      {id:'c4', name:'Catalogue 4'},
+      {id:'c1', name:'Catalogue Item 1'},
+      {id:'c2', name:'Catalogue Item 2'},
+      {id:'c3', name:'Catalogue Item 3'},
+      {id:'c4', name:'Catalogue Item 4'},
     ];
 
     $scope.openCatalogueItems = function () {
