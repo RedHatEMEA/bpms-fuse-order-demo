@@ -1,5 +1,6 @@
-angular.module('processApp', ['ui.bootstrap'])
-  .controller('ProcessController', ['$scope', function($scope) {
+angular.module('processApp', ['ui.bootstrap']);
+
+var ProcessController = function($scope,$modal,$log) {
     $scope.order = {};    
  
     $scope.submitOrder = function() {
@@ -29,11 +30,75 @@ angular.module('processApp', ['ui.bootstrap'])
       {id:'c5', name:'Campaign 5'}
     ];
 
-    $scope.catalogueItems = [
-      {id:'c1', name:'CI 1'},
-      {id:'c2', name:'CI 2'},
-      {id:'c3', name:'CI 3'},
-      {id:'c4', name:'CI 4'},
+    $scope.order.catalogueItems = [];
+
+    $scope.availableCatalogueItems = [
+      {id:'c1', name:'Catalogue 1'},
+      {id:'c2', name:'Catalogue 2'},
+      {id:'c3', name:'Catalogue 3'},
+      {id:'c4', name:'Catalogue 4'},
     ];
+
+    $scope.openCatalogueItems = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'catalogueItems.html',
+            controller: ModalInstanceCtrl,
+            size: 'sm',
+            resolve: {
+                items: function () {
+                return $scope.availableCatalogueItems.filter(function(toFind){
+                    return !$scope.order.catalogueItems.find(function(element,index,array){
+                        if(toFind.id == element.id){
+                            return true;
+                        }
+                        return false;
+                    });
+                });
+            }
+        }
+    });
+
+    $scope.removeCatalogueItem = function(index){
+        $scope.order.catalogueItems.splice(index,1);
+    }
+
+    modalInstance.result.then(function (selectedItems) {        
+        $scope.order.catalogueItems = $scope.order.catalogueItems.concat(selectedItems);        
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
     
-  }]);
+};
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  
+  $scope.selection = [];
+
+  $scope.toggleSelection = function(index){
+    var idx = $scope.selection.indexOf(index);
+   
+    // is currently selected
+    if (idx > -1) {
+        $scope.selection.splice(idx, 1);
+    }   
+    // is newly selected
+    else {
+        $scope.selection.push(index);
+    }  
+  }
+
+  $scope.ok = function () {
+    selectedItems = [];
+    angular.forEach($scope.selection,function(index){        
+        selectedItems.push($scope.items[index]);
+    });    
+    $modalInstance.close(selectedItems);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+};

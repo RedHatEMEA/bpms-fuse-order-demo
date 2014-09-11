@@ -1,7 +1,33 @@
 <!doctype html>
 <html ng-app="processApp">
-  <head>
-    <link href="css/bootstrap.min.css" rel="stylesheet">         
+  <head>  	
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    	.icon-list li {
+		  padding: 0 0 5px 20px;
+		  display: block;
+		  position: relative;
+		}
+		.icon-list li:before {
+		  font-family: 'Glyphicons Halflings';
+		  position: absolute;
+		  left: 0px;
+		  top:3px;
+		  font-size:80%
+		}
+		.chevron-right li:before {
+		 content: '\e080';
+		}
+
+		.checkmark li:before {
+		 content: '\e067';
+		}
+
+		.arrow-right li:before {
+		 content: '\e092';
+		}
+    </style>
   </head>
   <body>
   	<div class="container-fluid">	    
@@ -64,12 +90,43 @@
     				</select>	        		
 	        	</div>	
 
-	        	<div class="form-group col-md-2">
+	        	<div class="form-group col-md-2">	        		
 	    			<label>Catalogue Items:</label>
-	    			<select ng-model="order.catologueItems" ng-options="catalogueItem.id as catalogueItem.name for catalogueItem in catalogueItems" class="form-control" multiple ng-multiple="true">      					
-    				</select>	        		
-	        	</div>	
+	    			<button type="button" class="btn btn-success btn-sm" ng-click="openCatalogueItems()">
+  						<span class="glyphicon-plus"></span>
+					</button>
+
+					<br/>
+					<br/>
+
+	    			<ul class="list-unstyled icon-list chevron-right">
+                		<li ng-repeat="catalogueItem in order.catalogueItems">{{ catalogueItem.name }}  
+                			<button type="button" class="btn btn-danger btn-sm" ng-click="removeCatalogueItem($index)">
+  								<span class="glyphicon glyphicon-remove"></span>				
+  							</button>
+  						</li>
+            		</ul>	        		
+	        	</div>
 	    	</div>
+
+	    	<script type="text/ng-template" id="catalogueItems.html">
+        		<div class="modal-header">
+            		<h3 class="modal-title">I&apos;m a modal!</h3>
+        		</div>
+        		<div class="modal-body">
+            		<ul class="list-unstyled">
+                		<li ng-repeat="item in items">
+                			<input type="checkbox" ng-model="item.selected" ng-checked="selection.indexOf($index) > -1" ng-click="toggleSelection($index)">
+                    		<a ng-click="selected.item = item">{{ item.name }}</a>
+                		</li>
+            		</ul>
+            		Selected: <b>{{ selected.item.name }}</b>
+        		</div>
+        		<div class="modal-footer">
+            		<button class="btn btn-primary" ng-click="ok()">OK</button>
+            		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        		</div>
+    		</script>
 
 	    	<pre>{{ order | json }}</pre>
 			
