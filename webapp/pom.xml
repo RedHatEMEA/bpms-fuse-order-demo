@@ -63,7 +63,7 @@
 		          </deployables>
 		          <configuration>
 		            <properties>
-		              <cargo.servlet.port>8181</cargo.servlet.port>
+		              <cargo.servlet.port>8282</cargo.servlet.port>
 		              <cargo.jvmargs>
 		                ${jrebel.config}
 		                -Drebel.log=true

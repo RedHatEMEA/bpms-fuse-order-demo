@@ -15,4 +15,4 @@ Until the web application is fully integrated with Fuse, it can be tested locall
 
 - run mvn cargo:run
 
-- in your browser, navigate to http://localhost:8181
+- in your browser, navigate to http://localhost:8282
