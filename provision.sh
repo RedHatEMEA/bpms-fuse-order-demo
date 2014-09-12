@@ -140,8 +140,7 @@ sudo mkdir -p /etc/jboss-as
 sudo mkdir -p /opt/rh/jboss-eap-6.1/git
 sudo mkdir -p /opt/rh/jboss-eap-6.1/index
 sudo mkdir -p /opt/rh/jboss-eap-6.1/bpms-repo
-echo "Configure BPM Suite user"
-/opt/rh/jboss-eap-6.1/bin/add-user.sh -u bpmadmin -p bpmsuite1! -a --realm ApplicationRealm --role admin,analyst,manager
+
 
 cd /opt/rh
 sudo chmod -R 777 jboss-eap-6.1
@@ -151,6 +150,12 @@ sudo cp /vagrant/bpm/standalone.xml /opt/rh/jboss-eap-6.1/standalone/configurati
 sudo cp /opt/rh/jboss-eap-6.1/bin/init.d/jboss-as-standalone.sh /etc/init.d
 sudo chkconfig --add jboss-as-standalone.sh
 sudo chkconfig jboss-as-standalone.sh on
+echo "Configure BPM Suite user"
+# This is the preferred way but there seems to be an issue running this that -s should solve. https://access.redhat.com/solutions/462043
+#/opt/rh/jboss-eap-6.1/bin/add-user.sh -s -u bpmadmin -p bpmsuite1! -a --realm ApplicationRealm --role admin,analyst,manager
+sudo cp /vagrant/bpm/application-users.properties /opt/rh/jboss-eap-6.1/standalone/configuration
+sudo cp /vagrant/bpm/application-roles.properties /opt/rh/jboss-eap-6.1/standalone/configuration
+
 sudo service jboss-as-standalone.sh start 
 
 

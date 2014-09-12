@@ -13,9 +13,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   #config.vm.box = "chef/centos-6.5"
+  
+
   config.vm.box = "CentOS-6.5-x64-new"
   config.vm.box_url = "https://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-x86_64-v20140504.box"
-
+ 
+  # Override the base box URL if you are runnning KVM 
+  config.vm.provider "kvm" do |kvm|
+  	config.vm.box_url = "https://vagrant-kvm-boxes-si.s3.amazonaws.com/centos-6-amd64-kvm-20140415.box"
+  end
   config.vm.provision :shell, :path => "provision.sh"
 
   #config.vm.provision "ansible" do |ansible|
@@ -56,6 +62,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
@@ -69,6 +77,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   # Use VBoxManage to customize the VM. For example to change memory:
   #   vb.customize ["modifyvm", :id, "--memory", "8192"]
   end
+  config.vm.provider "kvm" do |kvm|
+    kvm.memory_size = "4GiB"
+  end
+
   #
   # View the documentation for the provider you're using for more
   # information on available options.
