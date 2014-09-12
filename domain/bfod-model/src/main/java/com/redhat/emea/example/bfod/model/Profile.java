@@ -1,7 +1,6 @@
 package com.redhat.emea.example.bfod.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * 
@@ -13,7 +12,7 @@ public class Profile
 	/**
 	 * The unique ID associated with a profile.
 	 */
-	private UUID id;
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String honorificPrefix;
@@ -23,7 +22,7 @@ public class Profile
 	/**
 	 * @return the id
 	 */
-	public UUID getId()
+	public String getId()
 	{
 		return id;
 	}
@@ -32,7 +31,7 @@ public class Profile
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(UUID id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

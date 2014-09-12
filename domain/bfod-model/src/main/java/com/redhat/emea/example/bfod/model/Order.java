@@ -1,7 +1,6 @@
 package com.redhat.emea.example.bfod.model;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 
@@ -14,7 +13,7 @@ public class Order
 	/**
 	 * The unique id associated with and Order.
 	 */
-	private UUID id;
+	private String id;
 	/**
 	 * The campaign to be applied to an Order.
 	 */
@@ -33,7 +32,7 @@ public class Order
 	/**
 	 * @return the id
 	 */
-	public UUID getId()
+	public String getId()
 	{
 		return id;
 	}
@@ -42,7 +41,7 @@ public class Order
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(UUID id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

@@ -1,7 +1,6 @@
 package com.redhat.emea.example.bfod.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * 
@@ -16,7 +15,7 @@ public class Campaign
 	/**
 	 * The unique identifier of the campaign.
 	 */
-	private UUID id;
+	private String id;
 
 	/**
 	 * The code associated with the campaign.
@@ -46,7 +45,7 @@ public class Campaign
 	/**
 	 * @return the id
 	 */
-	public UUID getId()
+	public String getId()
 	{
 		return id;
 	}
@@ -55,7 +54,7 @@ public class Campaign
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(UUID id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

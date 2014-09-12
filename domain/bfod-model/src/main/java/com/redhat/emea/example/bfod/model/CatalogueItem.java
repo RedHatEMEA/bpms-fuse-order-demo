@@ -1,7 +1,6 @@
 package com.redhat.emea.example.bfod.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * 
@@ -14,12 +13,12 @@ public class CatalogueItem
 	/**
 	 * The unique ID of the item.
 	 */
-	private UUID id;
+	private String id;
 
 	/**
 	 * The product ID of the product.
 	 */
-	private UUID productId;
+	private String productId;
 
 	/**
 	 * The amount that is the one off payment required for the product in pence.
@@ -49,7 +48,7 @@ public class CatalogueItem
 	/**
 	 * @return the id
 	 */
-	public UUID getId()
+	public String getId()
 	{
 		return id;
 	}
@@ -58,7 +57,7 @@ public class CatalogueItem
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(UUID id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}
@@ -66,7 +65,7 @@ public class CatalogueItem
 	/**
 	 * @return the productId
 	 */
-	public UUID getProductId()
+	public String getProductId()
 	{
 		return productId;
 	}
@@ -75,7 +74,7 @@ public class CatalogueItem
 	 * @param productId
 	 *            the productId to set
 	 */
-	public void setProductId(UUID productId)
+	public void setProductId(String productId)
 	{
 		this.productId = productId;
 	}
