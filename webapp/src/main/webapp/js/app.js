@@ -44,16 +44,18 @@ var ProcessController = function($scope,$modal,$log,$location) {
             size: 'sm',
             resolve: {
                 items: function () {
-                return $scope.availableCatalogueItems.filter(function(toFind){
-                    return !$scope.order.catalogueItems.find(function(element,index,array){
-                        if(toFind.id == element.id){
-                            return true;
-                        }
-                        return false;
+                  return $scope.availableCatalogueItems.filter(function(toFind){
+                    var matches = $.grep($scope.order.catalogueItems, function(e){ 
+                      return e.id == toFind.id; 
                     });
-                });
+                    /*
+                    Filter returns the list of items that are found to be true
+                    for the mapped function.  We want the opposite
+                    */
+                    return !(matches.length > 0);                    
+                  });
+                }
             }
-        }
     });
 
     $scope.removeCatalogueItem = function(index){
