@@ -17,6 +17,20 @@
   <url>http://maven.apache.org</url>
   
   <dependencies/>
+
+  <profiles>
+    <profile>
+      <id>no-jrebel</id>
+      <activation>
+        <property>
+          <name>!jrebel.config</name>
+        </property>
+      </activation>
+      <properties>
+        <jrebel.config></jrebel.config>
+      </properties>
+    </profile>
+  </profiles>
   
   <build>
     <finalName>bfod-webapp</finalName>
