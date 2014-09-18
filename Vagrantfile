@@ -19,9 +19,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "https://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-x86_64-v20140504.box"
  
   # Override the base box URL if you are runnning KVM 
-  config.vm.provider "kvm" do |kvm|
-  	config.vm.box_url = "https://vagrant-kvm-boxes-si.s3.amazonaws.com/centos-6-amd64-kvm-20140415.box"
-  end
+
+ if ARGV[1] and \
+    (ARGV[1].split('=')[0] == "--provider" or ARGV[2])
+      provider = (ARGV[1].split('=')[1] || ARGV[2])
+ else
+     provider = (ENV['VAGRANT_DEFAULT_PROVIDER'] || :virtualbox).to_sym
+ end
+ puts "Detected #{provider}"
+
+ if provider == "kvm"
+	config.vm.box_url = "https://vagrant-kvm-boxes-si.s3.amazonaws.com/centos-6-amd64-kvm-20140415.box"
+ end
+
+
   config.vm.provision :shell, :path => "provision.sh"
 
   #config.vm.provision "ansible" do |ansible|
