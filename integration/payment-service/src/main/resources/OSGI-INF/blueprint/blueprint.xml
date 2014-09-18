@@ -16,9 +16,8 @@
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
     <route>
         <from uri="cxfrs:bean:restFrontend"/>
-        <convertBodyTo type="String"/>  
-        <log message="Message : ${in.body}"/>	
-        <stop/>
+        <convertBodyTo type="String"/>
+        <log message="Message : ${in.body}"/>
     </route>
 </camelContext>
 </blueprint>
