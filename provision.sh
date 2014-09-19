@@ -138,6 +138,7 @@ sudo chown -fR vagrant /opt/rh/jboss-eap-6.1
 echo "Configure EAP as a service and start"
 sudo mkdir -p /etc/jboss-as
 sudo mkdir -p /opt/rh/jboss-eap-6.1/git
+sudo cp -r /vagrant/bpm/.niogit /opt/rh/jboss-eap-6.1/git
 sudo mkdir -p /opt/rh/jboss-eap-6.1/index
 sudo mkdir -p /opt/rh/jboss-eap-6.1/bpms-repo
 
@@ -155,6 +156,9 @@ echo "Configure BPM Suite user"
 #/opt/rh/jboss-eap-6.1/bin/add-user.sh -s -u bpmadmin -p bpmsuite1! -a --realm ApplicationRealm --role admin,analyst,manager
 sudo cp /vagrant/bpm/application-users.properties /opt/rh/jboss-eap-6.1/standalone/configuration
 sudo cp /vagrant/bpm/application-roles.properties /opt/rh/jboss-eap-6.1/standalone/configuration
+
+# Copy a settings.xml into maven so bpms can authenticate with its own internal repo
+sudo cp /vagrant/bpm/settings.xml /usr/local/maven/conf/
 
 sudo service jboss-as-standalone.sh start 
 

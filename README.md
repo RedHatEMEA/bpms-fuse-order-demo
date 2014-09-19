@@ -19,3 +19,7 @@ A demo illustrating interaction between BPMS and Fuse for an order fulfillment w
 1. Browse to [http://192.168.33.10:8181/hawtio](http://192.168.33.10:8181/hawtio) to access the Fuse Management Console
 
 1. Browse to [http://192.168.33.10:8080/business-central](http://192.168.33.10:8080/business-central) to access BPMS
+
+1. Build the model project and add it to BPMS - Authoring --> Artifact Repository --> Upload
+
+1. Build and Deploy the BPMS Project
