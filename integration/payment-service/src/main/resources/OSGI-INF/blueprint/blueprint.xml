@@ -9,15 +9,21 @@
              http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
              http://cxf.apache.org/blueprint/jaxrs http://http://cxf.apache.org/schemas/blueprint/jaxrs.xsd">
 
-	<cxf:rsServer id="restFrontend" address="http://localhost:9191/route"
-		serviceClass="com.redhat.emea.example.bfod.PaymentRESTService" />
-
+	<cxf:rsServer id="restFrontend" address="http://localhost:9191/rest">
+		<cxf:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+		</cxf:providers>
+		<cxf:serviceBeans>
+			<bean class="com.redhat.emea.example.bfod.order.OrderService"/>
+			<bean class="com.redhat.emea.example.bfod.PaymentRESTService"/>
+		</cxf:serviceBeans>
+	</cxf:rsServer>
 
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
-    <route>
-        <from uri="cxfrs:bean:restFrontend"/>
-        <convertBodyTo type="String"/>
-        <log message="Message : ${in.body}"/>
-    </route>
-</camelContext>
+		<route>
+			<from uri="cxfrs://bean://restFrontend" />			
+			<log message="Out Body: ${out.body}"/>
+		</route>
+	</camelContext>
+	
 </blueprint>

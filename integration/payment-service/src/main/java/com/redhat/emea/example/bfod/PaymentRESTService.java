@@ -23,7 +23,7 @@ public class PaymentRESTService
 
 	@GET
 	@Path("/payment/{input}/")
-	@Produces("text/plain")
+	@Produces("application/json")
 	public String getSomething(@PathParam("input") String input)
 	{
 		System.out.println("Called the frontend Service");
@@ -33,6 +33,7 @@ public class PaymentRESTService
 
 	@POST
 	@Path("/payment")
+	@Produces("application/json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String postSomething(InputStream input)
 	{
