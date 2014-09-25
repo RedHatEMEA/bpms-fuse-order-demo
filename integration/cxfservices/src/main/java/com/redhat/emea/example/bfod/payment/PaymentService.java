@@ -1,4 +1,4 @@
-package com.redhat.emea.example.bfod;
+package com.redhat.emea.example.bfod.payment;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,10 +13,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/restservice/")
-public class PaymentRESTService
+public class PaymentService
 {
 
-	public PaymentRESTService()
+	public PaymentService()
 	{
 
 	}

@@ -7,13 +7,22 @@ import java.util.Date;
  * A representation of an item available to be added to an {@link Order}.
  * 
  */
-public class CatalogueItem
+public class CatalogueItem implements java.io.Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The unique ID of the item.
 	 */
 	private String id;
+	
+	private String name;
+	
+	private boolean selected;
 
 	/**
 	 * The product ID of the product.
@@ -189,6 +198,28 @@ public class CatalogueItem
 		builder.append(expirationDateTime);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the selected
+	 */
+	public boolean isSelected() {
+		return selected;
+	}
+
+	/**
+	 * @param selected the selected to set
+	 */
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 }

@@ -9,15 +9,25 @@
              http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
              http://cxf.apache.org/blueprint/jaxrs http://http://cxf.apache.org/schemas/blueprint/jaxrs.xsd">
 
-	<cxf:rsServer id="restFrontend" address="http://localhost:9191/route"
-		serviceClass="com.redhat.emea.example.bfod.PaymentRESTService" />
-
-
+	
+	 
+	<bean id="paymentProcessor" class="com.redhat.emea.example.bfod.payment.PaymentProcessor" />
+	<bean id="orderProcessor" class="com.redhat.emea.example.bfod.order.OrderProcessor" />
+	
+	
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    
+    
     <route>
-        <from uri="cxfrs:bean:restFrontend"/>
-        <convertBodyTo type="String"/>
-        <log message="Message : ${in.body}"/>
+        <from uri="amq:incomingPayment" />
+        <to uri="bean:paymentProcessor" />
+
     </route>
+    <route>
+        <from uri="amq:incomingOrder" />
+        <to uri="bean:orderProcessor" />
+
+    </route>
+    
 </camelContext>
 </blueprint>

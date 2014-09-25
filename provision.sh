@@ -172,3 +172,20 @@ waitFor "started in" "/opt/rh/jboss-eap-6.1/standalone/log/server.log" "300" "Aw
 		echo "Server start up did not complete after a long wait"
 		
 	fi
+
+echo "Deploy the domain model"
+cd /vagrant/domain/bfod-model
+mvn clean install
+
+echo "Deploy web front-end"
+cd /vagrant/webapp
+mvn clean install
+mvn cargo:run
+
+echo "The web front-end is available at http://192.168.33.10:8282"
+
+echo "Deploy Camel routes"
+cd /vagrant/integration/cxfservices
+mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia
+cd /vagrant/integration/bpmintegration
+mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia

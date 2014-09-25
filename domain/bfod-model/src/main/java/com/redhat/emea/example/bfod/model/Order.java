@@ -7,9 +7,14 @@ import java.util.List;
  * Represents an Order to be processed.
  * 
  */
-public class Order
+public class Order implements java.io.Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The unique id associated with and Order.
 	 */

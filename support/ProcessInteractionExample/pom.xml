@@ -13,6 +13,11 @@
 	</properties>
 
 	<dependencies>
+	<dependency>
+			<groupId>com.redhat.emea.bfod</groupId>
+			<artifactId>bfod-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 				<dependency>
 			<groupId>org.kie.remote</groupId>
 			<artifactId>kie-services-client</artifactId>

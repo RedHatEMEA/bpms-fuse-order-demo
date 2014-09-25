@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/blueprint"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+             http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
+             http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://cxf.apache.org/blueprint/jaxrs http://http://cxf.apache.org/schemas/blueprint/jaxrs.xsd">
+
+	<cxf:rsServer id="orderService" address="http://0.0.0.0:9191/route">
+		<cxf:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+		</cxf:providers>
+		<cxf:serviceBeans>
+			<bean class="com.redhat.emea.example.bfod.order.OrderService"/>
+			
+		</cxf:serviceBeans>
+	</cxf:rsServer>
+	
+	<cxf:rsServer id="paymentService" address="http://0.0.0.0:9292/route">
+		<cxf:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+		</cxf:providers>
+		<cxf:serviceBeans>
+			
+			<bean class="com.redhat.emea.example.bfod.payment.PaymentService"/>
+		</cxf:serviceBeans>
+	</cxf:rsServer>
+	<!-- 	
+	<cxf:rsServer id="paymentService" address="http://0.0.0.0:9292/route"
+		serviceClass="com.redhat.emea.example.bfod.payment.PaymentService" />	
+	 -->
+	 
+	
+	<!-- define the gson data format, where we configure the data format using the properties -->
+	<bean id="gson" class="org.apache.camel.component.gson.GsonDataFormat">
+	    <!-- we want to unmarshal to person pojo -->
+	    <property name="unmarshalType" value="com.redhat.emea.example.bfod.model.Order"/>
+	    <!-- we want to map fields to use lower case and underscores -->
+	    <property name="fieldNamingPolicy" value="LOWER_CASE_WITH_UNDERSCORES"/>
+	</bean>
+	
+	
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    
+    <route>
+        <from uri="cxfrs:bean:orderService"/>
+        
+        <log message="Message : ${in.body[0]}"/>
+        <setBody>
+            <simple>${in.body[0]}</simple>
+        </setBody>
+        <inOnly uri="amq:incomingOrder"/>
+        <transform>
+            <constant>OK</constant>
+        </transform>
+    </route>
+    
+    <route>
+        <from uri="cxfrs:bean:paymentService"/>
+        <log message="Message : ${in.body}"/>
+        <setBody>
+            <simple>${in.body[0]}</simple>
+        </setBody>
+        <inOnly uri="amq:incomingPayment" />
+        <transform>
+            <constant>OK</constant>
+        </transform>
+    </route>
+
+    
+    
+</camelContext>
+</blueprint>

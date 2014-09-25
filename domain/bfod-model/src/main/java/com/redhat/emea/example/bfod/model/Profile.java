@@ -7,8 +7,14 @@ import java.util.Date;
  * The profile of a user placing an order.
  * 
  */
-public class Profile
+public class Profile implements java.io.Serializable
 {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The unique ID associated with a profile.
 	 */

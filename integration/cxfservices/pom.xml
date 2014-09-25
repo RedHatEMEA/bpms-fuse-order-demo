@@ -2,16 +2,40 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.emea.example.bfod</groupId>
-	<artifactId>payment-service</artifactId>
+	<artifactId>bfod-services</artifactId>
 	<packaging>bundle</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <resteasy.version>2.3.6.Final</resteasy.version>
+    <!-- <jbpm.version>6.0.2-redhat-6</jbpm.version> -->
+		<!-- <droolsjbpm.version>6.0.2-redhat-6</droolsjbpm.version> -->
+		<droolsjbpm.version>6.0.1.Final</droolsjbpm.version>
+		<jbpm.version>6.0.1.Final</jbpm.version>
   </properties>
 	
 	
 	<repositories>
+		<repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss.org Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jboss-releases</id>
+            <name>JBoss.org Fuse Releases</name>
+            <url>http://repository.jboss.org/nexus/content/repositories/fs-releases</url>
+        </repository>
 		<repository>
 			<id>release.fusesource.org</id>
 			<name>FuseSource Release Repository</name>
@@ -43,6 +67,28 @@
 			</snapshots>
 			<releases>
 				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>techpreview.redhat.com</id>
+			<name>Red Hat Tech Preview Repository</name>
+			<url>https://maven.repository.redhat.com/techpreview/all/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>ea.redhat.com</id>
+			<name>Red Hat Early Access Repository</name>
+			<url>https://maven.repository.redhat.com/earlyaccess/all/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
 			</releases>
 		</repository>
 	</repositories>
@@ -81,6 +127,25 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
+		<pluginRepository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss.org Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jboss-releases</id>
+            <name>JBoss.org Fuse Releases</name>
+            <url>http://repository.jboss.org/nexus/content/repositories/fs-releases</url>
+        </pluginRepository>
 	</pluginRepositories>
 	<dependencies>
 		<!-- assuming camel is pulling aries 1.0.0, pull asm 4.0 first -->
@@ -188,6 +253,56 @@
 			<version>2.7.0.redhat-610379</version>
 		</dependency>
 
+		<!-- ActiveMQ connectivity for Camel -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>5.9.0.redhat-610379</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-karaf</artifactId>
+            <version>5.9.0.redhat-610379</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+
+        <dependency>
+			<groupId>com.redhat.emea.bfod</groupId>
+			<artifactId>bfod-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+	      <groupId>commons-httpclient</groupId>
+	      <artifactId>commons-httpclient</artifactId>
+	      <version>3.1</version>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>org.apache.httpcomponents</groupId>
+	      <artifactId>httpcore</artifactId>
+	      <version>4.2.1-redhat-1</version>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-http</artifactId>
+	      <version>2.12.0.redhat-610379</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-gson</artifactId>
+	      <version>2.12.0.redhat-610379</version>
+	    </dependency>
+	        <dependency>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-stream</artifactId>
+	      <version>2.12.0.redhat-610379</version>
+	    </dependency>
+		
+
 	</dependencies>
 
 
@@ -219,13 +334,33 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <version>2.3.7</version>
         <extensions>true</extensions>
+        <!-- 
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>cxf-demo</Bundle-SymbolicName>
-            <Private-Package>com.mycompany.camel.cxf.*</Private-Package>
-            <Import-Package>*</Import-Package>
+            <Bundle-SymbolicName>bfod</Bundle-SymbolicName>
+            <Private-Package>com.redhat.emea.example.bfod.*</Private-Package>
+            <Import-Package>org.apache.commons.httpclient.*, *</Import-Package>
           </instructions>
         </configuration>
+       -->
+
+	<configuration>
+		<instructions>
+            
+             
+          </instructions>
+                    <instructions>
+                    <Import-Package>*</Import-Package>
+                    
+                        
+                         
+                        <Private-Package>
+                            com.redhat.emea.example.bfod.*
+                        </Private-Package>
+                    </instructions>
+                     
+                </configuration>
+ 
       </plugin>
 
       <!-- to run the example using mvn camel:run -->
@@ -244,11 +379,15 @@
     	<artifactId>fabric8-maven-plugin</artifactId>
 
     	<configuration>
-        	<profile>cxf-demo</profile>
-        	<features>camel-cxf fabric-cxf swagger</features>
+	    	
+        	<profile>bfod-services</profile>
+        	<!-- 
+        	<features>camel-gson camel-http camel-stream mq-fabric-camel camel-cxf fabric-cxf swagger</features>
+        	 -->
+        	<features>camel-gson mq-fabric-camel camel-cxf fabric-cxf swagger</features>
         	<parentProfiles>feature-camel feature-cxf</parentProfiles>
         	<version>1.0</version>
-      	</configuration>
+        	</configuration>
       </plugin>
     </plugins>
   </build>

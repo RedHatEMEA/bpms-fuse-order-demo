@@ -9,8 +9,13 @@ import java.util.Date;
  * 
  * 
  */
-public class Campaign
+public class Campaign implements java.io.Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The unique identifier of the campaign.

@@ -144,6 +144,11 @@ under the License.
       </httpConfiguration>
     </configuration>
   </server>
+  <server>
+      <username>admin</username>
+      <password>admin</password>
+      <id>fabric8.upload.repo</id>
+    </server>
 
   </servers>
 

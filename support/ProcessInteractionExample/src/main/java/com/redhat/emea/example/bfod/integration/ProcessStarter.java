@@ -10,6 +10,9 @@ import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.services.client.api.RemoteRestRuntimeFactory;
 
+import com.redhat.emea.example.bfod.model.Order;
+import com.redhat.emea.example.bfod.model.Profile;
+
 public class ProcessStarter
 {
 	public static void main(String args[]) throws MalformedURLException
@@ -24,7 +27,7 @@ public class ProcessStarter
 	public long startProcess() throws MalformedURLException
 	{
 		String deploymentId = "com.redhat.emea.example.bfod:bfod-bpm:1.0.0"; // this can be viewed from business-central -> properties of deployed Process
-		URL baseUrl = new URL("http://localhost:8080/business-central/");
+		URL baseUrl = new URL("http://192.168.33.10:8080/business-central/");
 		String user = "bpmadmin";
 		String password = "bpmsuite1!";
 
@@ -36,22 +39,35 @@ public class ProcessStarter
 		KieSession ksession = engine.getKieSession();
 
 		// The process ID is set when creating the process within the designer.
-		ProcessInstance processInstance = ksession.startProcess("com.redhat.emea.example.integration-test-process");
-		// Use this one when requiring arguments.
-		// ProcessInstance processInstance = ksession.startProcess("com.redhat.emea.example.integration-test-process", getProcessArgs());
+		Map<String, Object> processArgs =getProcessArgs();
+		processArgs.put("name", "myname");
+		 ProcessInstance processInstance = ksession.startProcess("com.redhat.emea.example.integration-test-process",processArgs );
 		
 		return processInstance.getId();
 		
+	
 	}
 
 	private static Map<String, Object> getProcessArgs()
 	{
 		Map<String, Object> processVariables = new HashMap<String, Object>();
 
-		// Create the required arguments to be passed in. 
-		
-		// The key is set as a variable on the the process. 
-		//processVariables.put("order", order);
+		// Create the required arguments to be passed in.
+
+		Profile profile = new Profile();
+		profile.setFirstName("A");
+		profile.setGender("male");
+		profile.setHonorificPrefix("Mr");
+		profile.setLastName("D");
+
+		Order order = new Order();
+
+		order.setId("1");
+		order.setProfile(profile);
+		// order.setCampaign(campaign);
+		// order.setCatalogueItems(catalogueItems);
+		// The key is set as a variable on the the process.
+		processVariables.put("order", order);
 		return processVariables;
 	}
 

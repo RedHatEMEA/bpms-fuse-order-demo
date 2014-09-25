@@ -1,0 +1,369 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.redhat.emea.example.bfod</groupId>
+	<artifactId>bpms-integration</artifactId>
+	<packaging>bundle</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<resteasy.version>2.3.6.Final</resteasy.version>
+		<!-- <jbpm.version>6.0.2-redhat-6</jbpm.version> -->
+		<!-- <droolsjbpm.version>6.0.2-redhat-6</droolsjbpm.version> -->
+		<droolsjbpm.version>6.0.1.Final</droolsjbpm.version>
+		<jbpm.version>6.0.1.Final</jbpm.version>
+	</properties>
+
+
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss.org Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>jboss-releases</id>
+			<name>JBoss.org Fuse Releases</name>
+			<url>http://repository.jboss.org/nexus/content/repositories/fs-releases</url>
+		</repository>
+		<repository>
+			<id>release.fusesource.org</id>
+			<name>FuseSource Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>ea.fusesource.org</id>
+			<name>FuseSource Community Early Access Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/groups/ea</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>snapshot.fusesource.org</id>
+			<name>FuseSource Snapshot Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>techpreview.redhat.com</id>
+			<name>Red Hat Tech Preview Repository</name>
+			<url>https://maven.repository.redhat.com/techpreview/all/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>ea.redhat.com</id>
+			<name>Red Hat Early Access Repository</name>
+			<url>https://maven.repository.redhat.com/earlyaccess/all/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>release.fusesource.org</id>
+			<name>FuseSource Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>ea.fusesource.org</id>
+			<name>FuseSource Community Early Access Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/groups/ea</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshot.fusesource.org</id>
+			<name>FuseSource Snapshot Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss.org Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jboss-releases</id>
+			<name>JBoss.org Fuse Releases</name>
+			<url>http://repository.jboss.org/nexus/content/repositories/fs-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<!-- assuming camel is pulling aries 1.0.0, pull asm 4.0 first -->
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-blueprint</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+
+
+		<!-- ActiveMQ connectivity for Camel -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+			<version>5.9.0.redhat-610379</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-karaf</artifactId>
+			<version>5.9.0.redhat-610379</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.redhat.emea.bfod</groupId>
+			<artifactId>bfod-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.2.1-redhat-1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			<version>2.12.0.redhat-610379</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${droolsjbpm.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kie.remote</groupId>
+			<artifactId>kie-services-client</artifactId>
+			<version>${droolsjbpm.version}</version>
+
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<scope>runtime</scope>
+			<version>2.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<scope>runtime</scope>
+			<version>1.2</version>
+		</dependency>
+		
+		<!-- <dependency> <groupId>org.kie</groupId> <artifactId>kie-api</artifactId> 
+			<version>${droolsjbpm.version}</version> </dependency> <dependency> <groupId>org.drools</groupId> 
+			<artifactId>drools-core</artifactId> <version>${droolsjbpm.version}</version> 
+			</dependency> <dependency> <groupId>org.drools</groupId> <artifactId>drools-compiler</artifactId> 
+			<version>${droolsjbpm.version}</version> </dependency> <dependency> <groupId>org.jbpm</groupId> 
+			<artifactId>jbpm-bpmn2</artifactId> <version>${droolsjbpm.version}</version> 
+			</dependency> <dependency> <groupId>org.jbpm</groupId> <artifactId>jbpm-runtime-manager</artifactId> 
+			<version>${droolsjbpm.version}</version> </dependency> <dependency> <groupId>org.jbpm</groupId> 
+			<artifactId>jbpm-flow</artifactId> <version>${droolsjbpm.version}</version> 
+			</dependency> <dependency> <groupId>org.osgi</groupId> <artifactId>org.osgi.core</artifactId> 
+			<version>4.3.0</version> </dependency> <dependency> <groupId>org.drools</groupId> 
+			<artifactId>drools-osgi-integration</artifactId> <version>${droolsjbpm.version}</version> 
+			</dependency> -->
+
+	</dependencies>
+
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- to generate the MANIFEST-FILE of the bundle -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<!-- <configuration> <instructions> <Bundle-SymbolicName>bfod</Bundle-SymbolicName> 
+					<Private-Package>com.redhat.emea.example.bfod.*</Private-Package> <Import-Package>org.apache.commons.httpclient.*, 
+					*</Import-Package> </instructions> </configuration> -->
+
+				<configuration>
+					<instructions>
+						<Export-Package>!*</Export-Package>
+						<Import-Package>
+							*;resolution:="optional"
+						</Import-Package>
+						<Embed-Dependency>*;scope=compile|runtime|provided;artifactId=kie*|jbpm*|resteasy*|jaxrs*|drools*|httpcore*|httpclient*|jackson*|jaxb*|jcl-over-slf4j|commons-io</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<Embed-Directory>OSGI-INF/lib</Embed-Directory>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Private-Package>
+							com.redhat.emea.example.bfod.*
+						</Private-Package>
+					</instructions>
+					<!-- </instructions> <instructions> <Import-Package>*</Import-Package> 
+						<Import-Package> org.slf4j;version="[1.5,2.0)", org.kie.services.client.api;version="[6.0,7)", 
+						org.eclipse.jdt.internal.compiler, org.osgi.framework, * </Import-Package> 
+						<Private-Package> com.redhat.emea.example.bfod.* </Private-Package> </instructions> -->
+				</configuration>
+
+			</plugin>
+
+			<!-- to run the example using mvn camel:run -->
+			<plugin>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-maven-plugin</artifactId>
+				<version>2.12.0.redhat-610379</version>
+				<configuration>
+					<useBlueprint>true</useBlueprint>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+
+				<configuration>
+
+					<profile>bpms-integration</profile>
+					<!-- <features>camel-gson camel-http camel-stream mq-fabric-camel camel-cxf 
+						fabric-cxf swagger</features> -->
+					<features>kie kie-aries-blueprint mq-fabric-camel swagger</features>
+					<featureRepos>mvn:org.drools/drools-karaf-features/6.1.0.Final/xml/features</featureRepos>
+					<parentProfiles>feature-camel feature-cxf</parentProfiles>
+					<version>1.0</version>
+					<!-- <bundles>wrap:mvn:org.kie.remote/kie-services-client/6.1.0.Final 
+						wrap:mvn:org.apache.httpcomponents/httpcore/4.2.1 wrap:mvn:org.apache.httpcomponents/httpclient/4.2.1</bundles> -->
+					<bundles>wrap:mvn:org.kie.remote/kie-services-client/6.1.0.Final</bundles>
+					<!-- <bundles>wrap:mvn:commons-httpclient/commons-httpclient/3.1</bundles> -->
+					<!-- <featureRepos>mvn:org.apache.camel.karaf/apache-camel/${version:camel}/xml/features</featureRepos> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
