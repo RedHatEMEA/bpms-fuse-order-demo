@@ -80,6 +80,8 @@ else
 	echo "add maven to the path"
 	export M2_HOME=/usr/local/maven
 	export PATH=$M2_HOME/bin:$PATH
+	echo "M2_HOME=/usr/local/maven" >> ~/.bashrc
+	echo "PATH=$M2_HOME/bin:$PATH" >> ~/.bashrc
 fi
 
 echo "Change to the vagrant shared folder"
