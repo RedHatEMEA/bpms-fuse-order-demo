@@ -26,7 +26,7 @@ public class PaymentService
 	@Produces("text/plain")
 	public String getSomething(@PathParam("input") String input)
 	{
-		System.out.println("Called the frontend Service");
+		System.out.println("Called the payment Service");
 		System.out.println(input);
 		return "Submitted";
 	}
