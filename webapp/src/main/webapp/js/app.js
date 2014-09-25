@@ -6,7 +6,7 @@ var ProcessController = function($scope,$http,$modal,$log,$location) {
     $scope.submitOrder = function() {
 
         $http({
-          url: 'http://localhost:9292/rest/orderservice/order',
+          url: 'http://localhost:9191/route/orderservice/order',
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           data: $scope.order,
