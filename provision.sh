@@ -161,6 +161,7 @@ sudo cp /vagrant/bpm/application-roles.properties /opt/rh/jboss-eap-6.1/standalo
 
 # Copy a settings.xml into maven so bpms can authenticate with its own internal repo
 sudo cp /vagrant/bpm/settings.xml /usr/local/maven/conf/
+sudo cp /vagrant/bpm/url_filter.yaml /opt/rh/jboss-eap-6.1/standalone/deployments/business-central.war/WEB-INF/classes/
 
 sudo service jboss-as-standalone.sh start 
 
