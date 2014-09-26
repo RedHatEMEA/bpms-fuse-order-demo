@@ -1,0 +1,4 @@
+fabric:container-create-child root bfodservices
+fabric:container-change-profile bfodservices bfod-services
+fabric:container-create-child root bpmsintegration
+fabric:container-change-profile bpmsintegration bpms-integration

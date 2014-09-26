@@ -180,12 +180,16 @@ mvn clean install
 echo "Deploy web front-end"
 cd /vagrant/webapp
 mvn clean install
-mvn cargo:run
+mvn cargo:run&
 
 echo "The web front-end is available at http://192.168.33.10:8282"
 
-echo "Deploy Camel routes"
+echo "Upload the Fabric profiles"
 cd /vagrant/integration/cxfservices
 mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia
 cd /vagrant/integration/bpmintegration
 mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia
+
+echo "Create the Fuse containers"
+cd /opt/rh/fuse/bin
+sudo ./client "source file:///vagrant/integration/fuse-create.karaf"
