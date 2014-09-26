@@ -182,7 +182,7 @@ mvn clean install
 echo "Deploy web front-end"
 cd /vagrant/webapp
 mvn clean install
-mvn cargo:run
+mvn cargo:run&
 
 echo "The web front-end is available at http://192.168.33.10:8282"
 
@@ -191,3 +191,13 @@ cd /vagrant/integration/cxfservices
 mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia
 cd /vagrant/integration/bpmintegration
 mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jolokia
+
+
+echo "If everything went smoothly then the following should be running"
+echo "BPMS : http://192.168.33.10:8080/business-central"
+echo "BPMS User: bpmadmin  | Password: bpmsuite1!"
+
+echo "Fuse Console : http://192.168.33.10:8181"
+echo "Fuse User : admmin | Password: admin"
+
+echo "Webapp : http://192.168.33.10:8282/"
