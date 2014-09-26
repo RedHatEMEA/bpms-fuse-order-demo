@@ -80,6 +80,8 @@ else
 	echo "add maven to the path"
 	export M2_HOME=/usr/local/maven
 	export PATH=$M2_HOME/bin:$PATH
+	echo "M2_HOME=/usr/local/maven" >> ~/.bashrc
+	echo "PATH=$M2_HOME/bin:$PATH" >> ~/.bashrc
 fi
 
 echo "Change to the vagrant shared folder"
@@ -159,6 +161,7 @@ sudo cp /vagrant/bpm/application-roles.properties /opt/rh/jboss-eap-6.1/standalo
 
 # Copy a settings.xml into maven so bpms can authenticate with its own internal repo
 sudo cp /vagrant/bpm/settings.xml /usr/local/maven/conf/
+sudo cp /vagrant/bpm/url_filter.yaml /opt/rh/jboss-eap-6.1/standalone/deployments/business-central.war/WEB-INF/classes/
 
 sudo service jboss-as-standalone.sh start 
 
@@ -193,3 +196,13 @@ mvn fabric8:deploy -DskipTests -Dfabric8.jolokiaUrl=http://192.168.33.10:8181/jo
 echo "Create the Fuse containers"
 cd /opt/rh/fuse/bin
 sudo ./client "source file:///vagrant/integration/fuse-create.karaf"
+
+
+echo "If everything went smoothly then the following should be running"
+echo "BPMS : http://192.168.33.10:8080/business-central"
+echo "BPMS User: bpmadmin  | Password: bpmsuite1!"
+
+echo "Fuse Console : http://192.168.33.10:8181"
+echo "Fuse User : admmin | Password: admin"
+
+echo "Webapp : http://192.168.33.10:8282/"
