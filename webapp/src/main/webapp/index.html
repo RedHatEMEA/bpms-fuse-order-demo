@@ -77,7 +77,7 @@
 			<div class="row">
 				<div class="form-group col-md-2 col-md-offset-5">
 	    			<label>Campaign:</label>
-	    			<select ng-model="order.campaign.id" ng-options="campaign.id as campaign.name for campaign in campaigns" class="form-control">
+	    			<select ng-model="order.campaign" ng-options="campaign as campaign.name for campaign in campaigns" class="form-control">
       					<option value="">-- choose campaign --</option>
     				</select>	        		
 	        	</div>

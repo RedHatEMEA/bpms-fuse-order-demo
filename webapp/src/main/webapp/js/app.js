@@ -5,7 +5,7 @@ var ProcessController = function($scope,$http,$modal,$log,$location) {
  
     $scope.submitOrder = function() {
       $http({
-        url: 'http://localhost:8282/api/orderservice/order',
+        url: 'http://192.168.33.10:8282/api/orderservice/order',
         method: "POST",
         data: $scope.order,
         headers: {'Content-Type': 'application/json'}
@@ -34,18 +34,18 @@ var ProcessController = function($scope,$http,$modal,$log,$location) {
     $scope.format = 'dd-MMMM-yyyy';
 
     $scope.campaigns = [
-      {id:'c1', name:'Campaign 1'},
-      {id:'c2', name:'Campaign 2'},
-      {id:'c3', name:'Campaign 3'},
-      {id:'c4', name:'Campaign 4'},
-      {id:'c5', name:'Campaign 5'}
+      {id:'c1', name:'Campaign 1', code:'CODE1', discountPercentage:'100', startDate:'1998-09-08T23:00:00.000Z', endDate:'2998-09-08T23:00:00.000Z'},
+      {id:'c2', name:'Campaign 2', code:'CODE2', discountPercentage:'20', startDate:'1998-09-08T23:00:00.000Z', endDate:'2998-09-08T23:00:00.000Z'},
+      {id:'c3', name:'Campaign 3', code:'CODE3', discountPercentage:'30', startDate:'1998-09-08T23:00:00.000Z', endDate:'2998-09-08T23:00:00.000Z'},
+      {id:'c4', name:'Campaign 4', code:'CODE4', discountPercentage:'30', startDate:'2098-09-08T23:00:00.000Z', endDate:'2998-09-08T23:00:00.000Z'},
+      {id:'c5', name:'Campaign 5', code:'CODE4', discountPercentage:'200', startDate:'1998-09-08T23:00:00.000Z', endDate:'2998-09-08T23:00:00.000Z'}
     ];    
 
     $scope.availableCatalogueItems = [
-      {id:'c1', name:'Catalogue Item 1'},
-      {id:'c2', name:'Catalogue Item 2'},
-      {id:'c3', name:'Catalogue Item 3'},
-      {id:'c4', name:'Catalogue Item 4'},
+      {id:'ci1', name:'Catalogue Item 1', frequency:'ONCE',activationDateTime:'1998-09-08T23:00:00.000Z', expirationDateTime:'2998-09-08T23:00:00.000Z', recurringAmount:'0', oneOffAmount:'0'},
+      {id:'ci2', name:'Catalogue Item 2', frequency:'MONTHLY',activationDateTime:'1998-09-08T23:00:00.000Z', expirationDateTime:'2998-09-08T23:00:00.000Z', recurringAmount:'100', oneOffAmount:'0'},
+      {id:'ci3', name:'Catalogue Item 3', frequency:'ONCE',activationDateTime:'1998-09-08T23:00:00.000Z', expirationDateTime:'2998-09-08T23:00:00.000Z', recurringAmount:'0', oneOffAmount:'100'},
+      {id:'ci4', name:'Catalogue Item 4', frequency:'ONCE',activationDateTime:'2098-09-08T23:00:00.000Z', expirationDateTime:'2998-09-08T23:00:00.000Z', recurringAmount:'0', oneOffAmount:'100'}
     ];
 
     $scope.openCatalogueItems = function () {
