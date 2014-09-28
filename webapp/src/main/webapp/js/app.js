@@ -1,11 +1,22 @@
 angular.module('processApp', ['ui.bootstrap']);
 
-var ProcessController = function($scope,$modal,$log,$location) {
+var ProcessController = function($scope,$http,$modal,$log,$location) {
     $scope.order = {campaign:{},profile:{},catalogueItems:[]};    
  
     $scope.submitOrder = function() {
-        alert("Submitting");
-    };
+      $http({
+        url: 'http://localhost:8282/api/orderservice/order',
+        method: "POST",
+        data: $scope.order,
+        headers: {'Content-Type': 'application/json'}
+        })
+        .success(function (data, status, headers, config) {
+          alert("Success");
+        }).error(function (data, status, headers, config) {
+          alert("Failure");
+        });
+    };  
+    
 
     $scope.open = function($event) {
         $event.preventDefault();
