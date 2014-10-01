@@ -203,6 +203,6 @@ echo "BPMS : http://192.168.33.10:8080/business-central"
 echo "BPMS User: bpmadmin  | Password: bpmsuite1!"
 
 echo "Fuse Console : http://192.168.33.10:8181"
-echo "Fuse User : admmin | Password: admin"
+echo "Fuse User : admin | Password: admin"
 
 echo "Webapp : http://192.168.33.10:8282/"
