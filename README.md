@@ -1,10 +1,10 @@
 bpms-fuse-order-demo
 ====================
 
-A demo illustrating interaction between BPMS and Fuse for an order fulfillment workflow process.
+A demo illustrating interaction between BPMS and Fuse for an order fulfilment work-flow process.
 
 
-1. Download and install Vagrant - https://www.vagrantup.com/downloads
+1. Download and install Vagrant - https://www.vagrantup.com/downloads - note on some operating systems you will additionally need to install VirtualBox [https://www.virtualbox.org/](https://www.virtualbox.org/)
 
 1. Download this repository and unzip it
 
@@ -20,6 +20,8 @@ A demo illustrating interaction between BPMS and Fuse for an order fulfillment w
 
 1. Browse to [http://192.168.33.10:8080/business-central](http://192.168.33.10:8080/business-central) to access BPMS
 
-1. Build the model project and add it to BPMS - Authoring --> Artifact Repository --> Upload
+1. Browse to [http://192.168.33.10:8282](http://192.168.33.10:8282) to access the web application
+
+1. Build the model project (integration/bpmintegration) and add it to BPMS - Authoring --> Artefact Repository --> Upload
 
 1. Build and Deploy the BPMS Project
