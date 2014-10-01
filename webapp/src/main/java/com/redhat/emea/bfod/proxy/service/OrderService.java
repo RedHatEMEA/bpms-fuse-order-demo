@@ -30,12 +30,16 @@ public class OrderService {
 		WebTarget myResource = client
 				.target("http://localhost:9191/route/orderservice/order");
 
-		PlaceOrderResponse response = myResource.request(
+		/*PlaceOrderResponse response = myResource.request(
 				MediaType.APPLICATION_JSON).post(Entity.json(order),
-				PlaceOrderResponse.class);
+				PlaceOrderResponse.class);*/
+		
 
-		return Response.ok().entity(response).build();
-
+		//return Response.ok().entity(response).build();
+		Response response = myResource.request().post(Entity.json(order));
+				
+		
+		return response;
 	}
 
 }
