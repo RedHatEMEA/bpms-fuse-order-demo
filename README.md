@@ -28,10 +28,10 @@ A demo illustrating interaction between BPMS and Fuse for an order fulfilment wo
 
 1. In the Deploy -> Deployments view remove the current deployment and create a new deployment unit. We want to select the Request strategy.
 
-Group Id : com.redhat.emea.example.bfod
-Artifact ID : bfod-bpm
+Group Id : com.redhat.emea.example.bfod <br/>
+Artifact ID : bfod-bpm<br/>
 Version : 1.0.0
 
 ===================
 
-If you stop and start the vagrant VM Fuse and the Web Interface are not started. There is a script to start these (in /vagrant after ssh in_
+If you stop and start the vagrant VM Fuse and the Web Interface are not started. There is a script to start these (in /vagrant after ssh in)
